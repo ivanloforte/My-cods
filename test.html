@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Input and Copy to Clipboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #e9ecef;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            min-height: 40px;
+            text-align: center;
+        }
+
+        .copy-button {
+            background-color: #28a745;
+        }
+
+        .copy-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>String Input App</h1>
+        <input type="text" id="Name" placeholder="Name" />
+        <input type="text" id="iPhone Model" placeholder="iPhone Model" />
+        <input type="text" id="Link" placeholder="Link" />
+        <button id="outputButton">Output Strings</button>
+        <div id="output" class="output"></div>
+        <button id="copyButton" class="copy-button">Copy to Clipboard</button>
+    </div>
+    
+    <script>
+        document.getElementById("outputButton").addEventListener("click", function() {
+            // Get the values from the input fields
+            const input1 = document.getElementById("Name").value;
+            const input2 = document.getElementById("iPhone Model").value;
+            const input3 = document.getElementById("Link").value;
+            
+            // Concatenate the strings
+            const output = `Apple Notification:\n Hello ${input1},\n We have located your lost iPhone ${input2}. You can check its location by clicking the link below: \n ${input3}\n Best regards ,\nApple Support Team`;
+            
+            // Display the output
+            document.getElementById("output").innerText = output;
+        });
+
+        document.getElementById("copyButton").addEventListener("click", function() {
+            // Get the output text
+            const outputText = document.getElementById("output").innerText;
+            
+            // Create a temporary textarea to hold the output
+            const textarea = document.createElement("textarea");
+            textarea.value = outputText;
+            document.body.appendChild(textarea);
+            
+            // Select and copy the textarea content
+            textarea.select();
+            document.execCommand("copy");
+            
+            // Remove the temporary textarea
+            document.body.removeChild(textarea);
+            
+            // Alert the user that the text has been copied
+            alert("Copied to clipboard: " + outputText);
+        });
+    </script>
+</body>
+</html>
